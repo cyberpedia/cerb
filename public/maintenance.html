@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maintenance - Cerberus CTF</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #0a0a0f 0%, #12121a 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            text-align: center;
+            max-width: 600px;
+        }
+        
+        .logo {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 30px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #00d4ff 0%, #00a8cc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            color: #00d4ff;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+        
+        .message {
+            font-size: 1.1rem;
+            color: #888;
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+        
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            background: rgba(255, 193, 7, 0.1);
+            border: 1px solid rgba(255, 193, 7, 0.3);
+            border-radius: 50px;
+            color: #ffc107;
+            font-size: 0.9rem;
+        }
+        
+        .status::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: #ffc107;
+            border-radius: 50%;
+            animation: blink 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        
+        .social {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .social p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .social-links a {
+            color: #00d4ff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: #fff;
+        }
+        
+        .estimated-time {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(0, 212, 255, 0.05);
+            border-radius: 10px;
+            border: 1px solid rgba(0, 212, 255, 0.1);
+        }
+        
+        .estimated-time h3 {
+            color: #00d4ff;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .estimated-time p {
+            color: #aaa;
+            font-size: 1.1rem;
+        }
+        
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            .subtitle { font-size: 1.1rem; }
+            .message { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Cerberus Logo SVG -->
+        <svg class="logo" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="45" stroke="#00d4ff" stroke-width="2" fill="none"/>
+            <circle cx="50" cy="50" r="35" stroke="#00d4ff" stroke-width="1" stroke-opacity="0.5" fill="none"/>
+            <path d="M50 15 L50 25 M50 75 L50 85 M15 50 L25 50 M75 50 L85 50" stroke="#00d4ff" stroke-width="2"/>
+            <circle cx="50" cy="50" r="8" fill="#00d4ff"/>
+            <path d="M35 35 L42 42 M65 35 L58 42 M35 65 L42 58 M65 65 L58 58" stroke="#00d4ff" stroke-width="2"/>
+        </svg>
+        
+        <h1>We'll Be Back Soon</h1>
+        <p class="subtitle">System Maintenance in Progress</p>
+        
+        <p class="message">
+            Our CTF platform is currently undergoing scheduled maintenance to improve your experience.
+            We're working hard to bring the challenges back online as quickly as possible.
+        </p>
+        
+        <div class="status">
+            <span>Maintenance Mode Active</span>
+        </div>
+        
+        <div class="estimated-time">
+            <h3>Estimated Completion</h3>
+            <p>Within 2 hours</p>
+        </div>
+        
+        <div class="social">
+            <p>Stay updated on our progress</p>
+            <div class="social-links">
+                <a href="https://twitter.com/ctf">Twitter</a>
+                <a href="https://discord.gg/ctf">Discord</a>
+                <a href="mailto:admin@ctf.com">Email</a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Auto-refresh every 60 seconds to check if site is back
+        setInterval(() => {
+            fetch('/health')
+                .then(response => {
+                    if (response.ok) {
+                        window.location.reload();
+                    }
+                })
+                .catch(() => {
+                    // Still in maintenance, do nothing
+                });
+        }, 60000);
+    </script>
+</body>
+</html>
