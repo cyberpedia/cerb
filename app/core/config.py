@@ -23,6 +23,7 @@ class Settings(BaseSettings):
     # Application
     app_name: str = Field(default="Cerberus", description="Application name")
     app_version: str = Field(default="1.0.0", description="Application version")
+    environment: str = Field(default="development", description="Application environment")
     debug: bool = Field(default=False, description="Debug mode")
     secret_key: str = Field(
         default="change-me-in-production",

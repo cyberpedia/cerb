@@ -32,6 +32,9 @@ async def get_db_session() -> AsyncSession:
         yield session
 
 
+DbSession = Annotated[AsyncSession, Depends(get_db_session)]
+
+
 
 async def get_current_user(
     request: Request,
